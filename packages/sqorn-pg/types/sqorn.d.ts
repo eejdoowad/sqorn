@@ -83,10 +83,16 @@ await names.all()
 }
 
 interface Sqorn {
+   /** Database API */
    db: Database
+   /** Select, Update, Delete, and Insert Query Builder */
    sq: AnyBuilder
+   /** Manual Query Builder */
    sql: ManualBuilder['sql']
+   /** Manual Fragment Builder */
    txt: FragmentBuilder['txt']
+   /** Raw Text Builder  */
    raw: Raw['raw']
+   /** Expression Builder */
    e: CreateExpression
 }

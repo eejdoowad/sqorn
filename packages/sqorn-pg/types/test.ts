@@ -1,12 +1,12 @@
 
 import sqorn = require('..')
 
-const { sq, e, db } = sqorn()
+const { sq, e, db, raw } = sqorn()
 
 sq.from('book').join('book').on({ a: 3 })
 sq.where({ a: e`true` })
 
-const x = sq.raw('')
+const x = raw('')
 const a = sq.txt(x)
 
 const a0 = e.add(sq.raw(''), 3).add(5).sub(6).eqAny([])

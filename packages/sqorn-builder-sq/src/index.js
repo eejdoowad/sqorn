@@ -2,7 +2,7 @@ const { camelCase, memoize } = require('@sqorn/lib-util')
 const createNewContext = require('./context')
 const build = Symbol.for('sqorn-build')
 
-const createQueryBuilder = ({ defaultContext, query, adapter, e, config }) => {
+const createQueryBuilder = ({ defaultContext, query, adapter, config }) => {
   const { escape } = defaultContext
   const { queries, methods, properties } = query
   const newContext = createNewContext(defaultContext)
@@ -23,16 +23,7 @@ const createQueryBuilder = ({ defaultContext, query, adapter, e, config }) => {
     ...(client && adapterProperties({ client, config })),
     ...methodProperties({ methods, chain }),
     ...properties,
-    ...(client && client.properties),
-    e: {
-      value: e
-    },
-    raw: {
-      value: function(arg) {
-        if (typeof arg === 'string') return () => arg
-        throw Error('Error: raw argument must be string')
-      }
-    }
+    ...(client && client.properties)
   })
   return chain()
 }

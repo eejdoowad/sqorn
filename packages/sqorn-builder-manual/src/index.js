@@ -22,16 +22,7 @@ const createQueryBuilder = ({ defaultContext, query, adapter, config }) => {
     ...(client && adapterProperties({ client, config })),
     ...methodProperties({ methods, chain }),
     ...properties,
-    ...(client && client.properties),
-    e: {
-      value: e
-    },
-    raw: {
-      value: function(arg) {
-        if (typeof arg === 'string') return () => arg
-        throw Error('Error: raw argument must be string')
-      }
-    }
+    ...(client && client.properties)
   })
   return chain()
 }
@@ -100,102 +91,4 @@ const builderProperties = ({ chain, newContext, updateContext, queries }) => ({
     }
   }
 })
-
-const adapterProperties = ({
-  client,
-  config: { mapOutputKeys = camelCase }
-}) => {
-  const mapKey = memoize(mapOutputKeys)
-  return {
-    end: {
-      value: async function() {
-        return client.end()
-      }
-    },
-    all: {
-      value: async function(trx) {
-        const rows = await client.query(this.query, trx)
-        return mapRowKeys(rows, mapKey)
-      }
-    },
-    first: {
-      value: async function(trx) {
-        const rows = await client.query(this.query, trx)
-        return mapRowKeys(rows, mapKey)[0]
-      }
-    },
-    one: {
-      value: async function(trx) {
-        const rows = await client.query(this.query, trx)
-        if (rows.length === 0) throw Error('Error: 0 result rows')
-        return mapRowKeys(rows, mapKey)[0]
-      }
-    },
-    run: {
-      value: async function(trx) {
-        await client.query(this.query, trx)
-      }
-    },
-    transaction: {
-      value: function(fn) {
-        return fn ? client.transactionCallback(fn) : client.transactionObject()
-      }
-    }
-  }
-}
-
-const mapRowKeys = (rows, fn) =>
-  rows.length === 0
-    ? rows
-    : rows.length === 1
-      ? mapOneRowKeys(rows, fn)
-      : mapMultipleRowsKeys(rows, fn)
-
-const mapOneRowKeys = (rows, fn) => {
-  const [row] = rows
-  const out = {}
-  for (const key in row) {
-    out[fn(key)] = row[key]
-  }
-  return [out]
-}
-
-const mapMultipleRowsKeys = (rows, fn) => {
-  const mapping = {}
-  for (const key in rows[0]) {
-    mapping[key] = fn(key)
-  }
-  return rows.map(row => {
-    const mapped = {}
-    for (const key in mapping) {
-      mapped[mapping[key]] = row[key]
-    }
-    return mapped
-  })
-}
-
-/** Builds object containing a property for every query building method */
-const methodProperties = ({ methods, chain }) => {
-  const properties = {}
-  for (const name in methods) {
-    const { getter } = methods[name]
-    if (getter) {
-      // add getter methods
-      properties[name] = {
-        get: function() {
-          return chain({ name, prev: this.method })
-        }
-      }
-    } else {
-      // add function call methods
-      properties[name] = {
-        value: function(...args) {
-          return chain({ name, args, prev: this.method })
-        }
-      }
-    }
-  }
-  return properties
-}
-
 module.exports = createQueryBuilder

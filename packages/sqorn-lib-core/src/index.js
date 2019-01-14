@@ -17,20 +17,27 @@ const build = Symbol.for('sqorn-build')
 const createSqorn = ({ dialect, adapter }) => (config = {}) => {
   const { query, expression, parameterize, escape } = dialect
 
-  // 1. Create default context properties passed through build tree
+  //  Create default context properties passed through build tree
   const mapKey = memoize(config.mapInputKeys || snakeCase)
   const defaultContext = { parameterize, escape, mapKey, build }
 
-  // 2. Create Expression Builder
+  // Create Typed Query Builder
+  const sq = createQueryBuilder({ defaultContext, query, adapter, config })
+
+  // Create Manual Query Builder
+
+  // Create Fragment Builder
+
+  // Create Raw String Builder
+  const raw = arg => {
+    if (typeof arg === 'string') return () => arg
+    throw Error('Error: Raw argument must be string')
+  }
+
+  // Create Expression Builder
   const e = createExpressionBuilder({ defaultContext, expression, config })
 
-  // 3. Create Query Builder
-  const sq = createQueryBuilder({ defaultContext, query, adapter, e, config })
-
-  // 4. TODO: Build Executor, Attach e and execute functions
-
-  // 5. TODO: Return { sq, e, transaction, db }
-  return sq
+  return { sq, sql, txt, raw, e, db }
 }
 
 function build(arg) {
