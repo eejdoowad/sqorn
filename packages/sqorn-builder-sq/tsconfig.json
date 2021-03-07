@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.settings.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": "src"
+  },
+  "references": [
+    { "path": "../sqorn-lib-types" },
+    { "path": "../sqorn-lib-util" }
+  ]
+}

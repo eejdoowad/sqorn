@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+      // Always include these settings
+      "composite": true,
+      "declaration": true,
+      "declarationMap": true,
+      "sourceMap": true,
+
+      // These settings are totally up to you        
+      "esModuleInterop": true,
+      "target": "esnext",
+      "module": "commonjs",
+      "strict": true
+  }
+}

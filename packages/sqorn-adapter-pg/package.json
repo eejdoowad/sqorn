@@ -7,10 +7,14 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "main": "./src/index.js",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "repository": "https://github.com/sqorn/sqorn/tree/master/packages/sqorn-adapter-pg",
   "homepage": "https://sqorn.org",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@sqorn/lib-types": "^0.0.45"
   }
 }

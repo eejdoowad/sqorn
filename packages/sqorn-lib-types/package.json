@@ -1,0 +1,17 @@
+{
+  "name": "@sqorn/lib-types",
+  "version": "0.0.45",
+  "description": "Sqorn Internal Type Library",
+  "author": "Sufyan Dawoodjee <eejdoowad@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "repository": "https://github.com/sqorn/sqorn/tree/master/packages/sqorn-lib-types",
+  "homepage": "https://sqorn.org",
+  "publishConfig": {
+    "access": "public"
+  }
+}

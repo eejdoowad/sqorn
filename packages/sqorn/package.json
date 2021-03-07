@@ -7,7 +7,7 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "main": "./src/index.js",
+  "main": "lib/index.js",
   "repository": "https://github.com/sqorn/sqorn/tree/master/packages/sqorn",
   "homepage": "https://sqorn.org",
   "keywords": [

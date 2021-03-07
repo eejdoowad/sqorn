@@ -7,7 +7,8 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "main": "./src/index.js",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "repository": "https://github.com/sqorn/sqorn/tree/master/packages/sqorn-sql",
   "homepage": "https://sqorn.org",
   "publishConfig": {
@@ -25,6 +26,7 @@
     "literals"
   ],
   "dependencies": {
+    "@sqorn/lib-types": "^0.0.45",
     "@sqorn/lib-util": "^0.0.45"
   }
 }

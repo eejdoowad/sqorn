@@ -1,0 +1,26 @@
+{
+  "files": [],
+  "references": [
+      { "path": "sqorn-adapter-mysql" },
+      { "path": "sqorn-adapter-node-sqlite3" },
+      { "path": "sqorn-adapter-pg" },
+      { "path": "sqorn-builder-expression" },
+      { "path": "sqorn-builder-manual" },
+      { "path": "sqorn-builder-sq" },
+      { "path": "sqorn-database" },
+      { "path": "sqorn-dialect-mysql" },
+      { "path": "sqorn-dialect-postgres" },
+      { "path": "sqorn-dialect-sqlite" },
+      { "path": "sqorn-executable" },
+      { "path": "sqorn-lib-core" },
+      { "path": "sqorn-lib-expression" },
+      { "path": "sqorn-lib-sq" },
+      { "path": "sqorn-lib-types" },
+      { "path": "sqorn-lib-util" },
+      { "path": "sqorn-mssql" },
+      { "path": "sqorn-mysql" },
+      { "path": "sqorn-oracle" },
+      { "path": "sqorn-pg" },
+      { "path": "sqorn-sqlite" }
+  ]
+}
